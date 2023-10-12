@@ -1,0 +1,42 @@
+===| Running Data Two Through AutoRT's base Phospho Model |===
+
+done
+py autort.py predict -t C:\Users\kurti\Desktop\PhosphoPepPaper\testing_DATA_TWO_AUTO_RT.tsv -s models/ptm_base_model/phosphorylation_sty/model.json -o C:\Users\kurti\Desktop\PhosphoPepPaper\autoRT\dataTwo_baseModel\ -p test
+
+===| Building Model From Scratch With AutoRT (param set one) |===
+
+done
+py autort.py train -e 100 -b 64 -m models\base_model\model.json -u m -i C:\Users\kurti\Desktop\PhosphoPepPaper\trainingSet_DATA_TWO_AUTO_RT.tsv -sm min_max -rlr -n 20 -o C:\Users\kurti\Desktop\PhosphoPepPaper\autoRT\dataTwo_scratchModel_one
+
+===| Building Model From Scratch With AutoRT (param set two) |===
+
+done
+py autort.py train -e 40 -b 64 -m models\base_model\model.json -u m -i C:\Users\kurti\Desktop\PhosphoPepPaper\trainingSet_DATA_TWO_AUTO_RT.tsv -sm min_max -rlr -n 20 -o C:\Users\kurti\Desktop\PhosphoPepPaper\autoRT\dataTwo_scratchModel_two
+
+===| Transfer Learning with AutoRT (param set one) |===
+
+done
+py autort.py train -i C:\Users\kurti\Desktop\PhosphoPepPaper\trainingSet_DATA_TWO_AUTO_RT.tsv -o C:\Users\kurti\Desktop\PhosphoPepPaper\autoRT\dataTwo_transferModel_one -e 100 -b 64 -u m -m models/ptm_base_model/phosphorylation_sty/model.json -rlr -n 20
+
+===| Transfer Learning with AUtoRT (param set two) |===
+
+done
+py autort.py train -i C:\Users\kurti\Desktop\PhosphoPepPaper\trainingSet_DATA_TWO_AUTO_RT.tsv -o C:\Users\kurti\Desktop\PhosphoPepPaper\autoRT\dataTwo_transferModel_two -e 40 -b 64 -u m -m models/ptm_base_model/phosphorylation_sty/model.json -rlr -n 20
+
+============= PREDICTING FOR BUILT MODELS =================
+
+===| Running Data Two Through Scratch Model One |===
+
+py autort.py predict -t C:\Users\kurti\Desktop\PhosphoPepPaper\testing_DATA_TWO_AUTO_RT.tsv -s C:\Users\kurti\Desktop\PhosphoPepPaper\autoRT\dataTwo_scratchModel_one\model.json -o C:\Users\kurti\Desktop\PhosphoPepPaper\autoRT\dataTwo_scratchModel_one_predictions\ -p test
+
+===| Running Data Two Through Scracth Model Two |===
+
+py autort.py predict -t C:\Users\kurti\Desktop\PhosphoPepPaper\testing_DATA_TWO_AUTO_RT.tsv -s C:\Users\kurti\Desktop\PhosphoPepPaper\autoRT\dataTwo_scratchModel_two\model.json -o C:\Users\kurti\Desktop\PhosphoPepPaper\autoRT\dataTwo_scratchModel_two_predictions\ -p test
+
+===| Running Data Two Through Transfer Model One |===
+
+py autort.py predict -t C:\Users\kurti\Desktop\PhosphoPepPaper\testing_DATA_TWO_AUTO_RT.tsv -s C:\Users\kurti\Desktop\PhosphoPepPaper\autoRT\dataTwo_transferModel_one\model.json -o C:\Users\kurti\Desktop\PhosphoPepPaper\autoRT\dataTwo_transferModel_one_predictions\ -p test
+
+===| Running Data Two Through Transfer Model Two |===
+
+py autort.py predict -t C:\Users\kurti\Desktop\PhosphoPepPaper\testing_DATA_TWO_AUTO_RT.tsv -s C:\Users\kurti\Desktop\PhosphoPepPaper\autoRT\dataTwo_transferModel_two\model.json -o C:\Users\kurti\Desktop\PhosphoPepPaper\autoRT\dataTwo_transferModel_two_predictions\ -p test
